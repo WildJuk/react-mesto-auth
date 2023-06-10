@@ -50,7 +50,7 @@ function App() {
           setLoggedIn(true);
           setEmail(res.data.email)
           loadInitialAppData();
-          navigate("/react-mesto-auth", { replace: true });
+          navigate("/", { replace: true });
         }
       });
     }
@@ -185,7 +185,7 @@ function App() {
 
   const onSignOut = () => {
     localStorage.removeItem('jwt');
-    navigate('/react-mesto-auth/sign-in', { replace: true });
+    navigate('/sign-in', { replace: true });
     handleLogout();
   };
 
@@ -194,7 +194,7 @@ function App() {
       .then(() => {
         setIsTooltipPopupOpen(true);
         setTooltipPopupType('success');
-        navigate('/react-mesto-auth/sign-in', { replace: true });
+        navigate('/login', { replace: true });
       })
       .catch(() => {
         setIsTooltipPopupOpen(true);
@@ -209,7 +209,7 @@ function App() {
           setEmail(email)
           localStorage.setItem('jwt', data.token);
           handleLogin();
-          navigate('/react-mesto-auth', { replace: true });
+          navigate('/', { replace: true });
         }
       })
       .catch(() => {
@@ -225,9 +225,9 @@ function App() {
         <Header loggedIn={loggedIn} onSignOut={onSignOut} email={email} />
 
         <Routes>
-          <Route path="/react-mesto-auth/*" element={<Navigate to="/react-mesto-auth" />} />
+          <Route path="/*" element={<Navigate to="/" />} />
           <Route
-            path="/react-mesto-auth"
+            path="/"
             element={
               <ProtectedRouteElement
                 element={Main}
@@ -243,7 +243,7 @@ function App() {
             }
           />
           <Route
-            path="/react-mesto-auth/sign-up"
+            path="/sign-up"
             element={
               <Register
                 onRegister={onRegister}
@@ -251,7 +251,7 @@ function App() {
             }
           />
           <Route
-            path="/react-mesto-auth/sign-in"
+            path="/sign-in"
             element={
               <Login
                 onLogin={onLogin}
