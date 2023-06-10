@@ -1,9 +1,9 @@
 import React from "react";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import cross from '../images/profile/__cross.svg';
-import editAvatar from '../images/profile/__avatar-edit.svg';
-import editProfileImg from '../images/profile/__edit.svg';
+import cross from './../images/profile/__cross.svg';
+import editAvatar from './../images/profile/__avatar-edit.svg';
+import editProfileImg from './../images/profile/__edit.svg';
 
 export default function Main({
     cards,
