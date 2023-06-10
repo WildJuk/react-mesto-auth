@@ -1,6 +1,9 @@
 import React from "react";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import cross from '../images/profile/__cross.svg';
+import editAvatar from '../images/profile/__avatar-edit.svg';
+import editProfileImg from '../images/profile/__edit.svg';
 
 export default function Main({
     cards,
@@ -22,6 +25,7 @@ export default function Main({
                         alt="Фотография профиля"
                         className="profile__avatar"
                     />
+                    <img src={editAvatar} width={26} height={26} className="profile__edit-avatar-img" />
                 </div>
                 <div className="profile__info">
                     <h1 className="profile__name">{currentUser.name || ''}</h1>
@@ -30,7 +34,9 @@ export default function Main({
                         aria-label="Редактировать профиль"
                         className="profile__edit-button"
                         onClick={onEditProfile}
-                    />
+                    >
+                        <img src={editProfileImg} width={24} height={24} />
+                    </button>
                     <p className="profile__about">{currentUser.about || ''}</p>
                 </div>
                 <button
@@ -38,7 +44,9 @@ export default function Main({
                     aria-label="Добавить"
                     className="profile__add-button"
                     onClick={onAddPlace}
-                />
+                >
+                    <img src={cross} width={22} height={22} />
+                </button>
             </section>
 
             <section className="elements">
