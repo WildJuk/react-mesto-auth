@@ -11,9 +11,10 @@ import ProtectedRouteElement from './ProtectedRoute';
 import Login from './Login';
 import Register from './Register';
 import InfoTooltip from './InfoTooltip';
-import { FormValidator } from './FormValidator';
+import { FormValidator } from '../utils/FormValidator';
 import { api } from '../utils/api';
 import * as auth from '../utils/api-auth';
+import { renderLoading } from '../utils/utils';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 
@@ -52,6 +53,9 @@ function App() {
           loadInitialAppData();
           navigate("/", { replace: true });
         }
+      })
+      .catch(error => {
+        console.log(error);
       });
     }
   };
@@ -140,6 +144,7 @@ function App() {
   };
 
   function handleUpdateUser(newUserData) {
+    renderLoading('.form_profile-edit', true);
     api.setUserInfo(newUserData)
       .then((userData) => {
         setCurrentUser(userData);
@@ -148,9 +153,13 @@ function App() {
       .catch(err =>
         console.log(`Ошибка загрузки обновления информации о пользователе: ${err}`)
       )
+      .finally(() => {
+        renderLoading('.form_profile-edit', false);
+      })
   };
 
   function handleUpdateAvatar(newUserAvatar) {
+    renderLoading('.form_avatar-edit', true);
     api.setUserAvatar(newUserAvatar)
       .then((userData) => {
         setCurrentUser(userData);
@@ -159,9 +168,13 @@ function App() {
       .catch(err =>
         console.log(`Ошибка загрузки обновления аватара пользователя: ${err}`)
       )
+      .finally(() => {
+        renderLoading('.form_avatar-edit', false);
+      })
   };
 
   function handleAddPlaceSubmit(newPlace) {
+    renderLoading('.form_add-card', true);
     api.addNewCard(newPlace)
       .then((newCard) => {
         setCards(prevState => [newCard, ...prevState]);
@@ -170,6 +183,9 @@ function App() {
       .catch(err =>
         console.log(`Ошибка загрузки новой карточки: ${err}`)
       )
+      .finally(() => {
+        renderLoading('.form_add-card', false);
+      })
   };
 
   function loadInitialAppData() {

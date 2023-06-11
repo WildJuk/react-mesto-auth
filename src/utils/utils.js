@@ -1,8 +1,9 @@
-export const renderLoading = (popupSelector, isLoading) => {
-  const buttonInActivePopup = document.querySelector(`${popupSelector} .popup__submit-button`);
+export const renderLoading = (formSelector, isLoading) => {
+  console.log(formSelector, document.querySelector(formSelector))
+  const submitButton = document.querySelector(`${formSelector} .form__submit-button`);
   if(isLoading) {
-    buttonInActivePopup.textContent = 'Сохранение...';
+    submitButton.textContent = 'Сохранение...';
   } else {
-    buttonInActivePopup.textContent = 'Сохранить';
+    submitButton.textContent = 'Сохранить';
   }
 };
